@@ -14,7 +14,7 @@ docker run \
   --entrypoint="/usr/bin/build-inner" \
   "ubuntu:$2"  $1
 
-docker cp build-inner "$NAME":/usr/bin/build-inner
+docker cp ubuntu/build-inner "$NAME":/usr/bin/build-inner
 
 docker start -a $NAME
 
