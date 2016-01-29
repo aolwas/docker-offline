@@ -9,15 +9,15 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
-NAME="docker-build-centos-$1"
+NAME="docker-build-centos"
 
 if [[ -n $1 ]]; then
-    all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
-else
     all_versions=$1
+else
+    all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
 fi
 
-for v in $all_verisons; do
-    yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME
-    tar zcf /data/$NAME.tar /data/$NAME
+for v in $all_versions; do
+    yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME-$v
+    tar zcf /data/$NAME-$v.tar /data/$NAME-$v
 done
