@@ -2,7 +2,7 @@ include Makefile.variable
 
 print-%: ; @echo $*=$($*)
 
-all: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-all.tar.gz
+all: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz target/docker-$(DOCKER_VERSION)-all.tar.gz
 
 github-release: ubuntu1404-github total-github
 
@@ -20,6 +20,23 @@ target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz: target/ubuntu14.04
 
 ubuntu1404-github: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz github-tag
 	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz 2>/dev/null; true
+
+
+target/ubuntu12.04:
+	echo 'building ubuntu 12.04'
+	mkdir -p target/ubuntu12.04
+	bash ubuntu/build.sh $(DOCKER_VERSION) 12.04 target/ubuntu12.04
+
+target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz: target/ubuntu12.04
+	rm -rf target/docker-$(DOCKER_VERSION)-ubuntu12.04
+	mkdir -p target/docker-$(DOCKER_VERSION)-ubuntu12.04
+	cp -r target/ubuntu12.04 target/docker-$(DOCKER_VERSION)-ubuntu12.04
+	cp install.sh target/docker-$(DOCKER_VERSION)-ubuntu12.04
+	tar -zcvf target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz -C target docker-$(DOCKER_VERSION)-ubuntu12.04
+
+ubuntu1204-github: target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz github-tag
+	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz 2>/dev/null; true
+
 
 
 target/docker-$(DOCKER_VERSION)-all.tar.gz: target/ubuntu14.04

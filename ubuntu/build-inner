@@ -3,7 +3,7 @@
 set -ex
 
 apt-get update
-sudo apt-get install -y -q apt-transport-https openssh-client
+apt-get install -y -q apt-transport-https openssh-client lsb-release
 rm -rf /var/cache/apt/archives/*
 
 lsb_dist="$(lsb_release -si)"
