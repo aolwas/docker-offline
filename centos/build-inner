@@ -1,0 +1,23 @@
+#!/bin/bash
+
+cat >/etc/yum.repos.d/docker-main.repo <<-EOF
+[docker-main-repo]
+name=Docker main Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+NAME="docker-build-centos-$1"
+
+if [[ -n $1 ]]; then
+    all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
+else
+    all_versions=$1
+fi
+
+for v in $all_verisons; do
+    yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME
+    tar zcf /data/$NAME.tar /data/$NAME
+done
