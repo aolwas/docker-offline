@@ -10,7 +10,6 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
 NAME="docker-build-centos"
-
 if [[ -z $1 || $1 == "all" ]]; then
     all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
 else
