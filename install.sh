@@ -76,7 +76,7 @@ case "$lsb_dist" in
 			if command_exists lsb_release; then
 				lsb_version="$(lsb_release --release | cut -f2)"
 			fi
-			$sh_c "dpkg -i docker-offline-ubuntu${lsb_version}/*.deb"
+			$sh_c "dpkg -i ubuntu${lsb_version}/*.deb"
 
 		)
 		exit 0

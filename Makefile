@@ -11,7 +11,8 @@ ubuntu1404:
 	mkdir -p target/docker-$(DOCKER_VERSION)-ubuntu14.04
 	cp -r target/ubuntu14.04 target/docker-$(DOCKER_VERSION)-ubuntu14.04
 	cp install.sh target/docker-$(DOCKER_VERSION)-ubuntu14.04
-	tar -cxvf docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-ubuntu14.04
+	cd target
+	tar -cxvf docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz docker-$(DOCKER_VERSION)-ubuntu14.04
 
 total:
 	echo 'total'
