@@ -1,5 +1,4 @@
 SHELL=\bash
 
 DOCKER_VERSION=$(shell cat VERSION)
-GITHUB_TOKEN=$(shell echo $${GITHUB_TOKEN})
 

@@ -19,11 +19,8 @@ ubuntu1404: ubuntu1404src
 	tar -zcvf target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz -C target docker-$(DOCKER_VERSION)-ubuntu14.04
 
 ubuntu1404-github: ubuntu1404
-	curl -H "Authorization: token $(GITHUB_TOKEN)" \
-     -H "Accept: application/vnd.github.manifold-preview" \
-     -H "Content-Type: application/tar+gzip" \
-     --data-binary target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz \
-     "https://uploads.github.com/repos/DaoCloud/docker-offline/releases/$(DOCKER_VERSION)/assets?name=docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz"
+	github-release release -u DaoCloud -r docker-offline -t $(DOCKER_VERSION)
+	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz
 
 
 total: ubuntu1404src
@@ -32,6 +29,10 @@ total: ubuntu1404src
 	cp -r target/ubuntu14.04 target/docker-$(DOCKER_VERSION)-all
 	cp install.sh target/docker-$(DOCKER_VERSION)-all
 	tar -zcvf target/docker-$(DOCKER_VERSION)-all.tar.gz -C target docker-$(DOCKER_VERSION)-all
+
+total-github: total
+	github-release release -u DaoCloud -r docker-offline -t $(DOCKER_VERSION)
+	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-all.tar.gz -f target/docker-$(DOCKER_VERSION)-all.tar.gz
 
 
 clean:
