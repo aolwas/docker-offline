@@ -1,0 +1,4 @@
+SHELL=\bash
+
+DOCKER_VERSION=$(shell cat VERSION)
+
