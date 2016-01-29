@@ -15,4 +15,4 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 mkdir -p /etc/apt/sources.list.d
 echo deb https://apt.dockerproject.org/repo ${lsb_dist}-${dist_version} main > /etc/apt/sources.list.d/docker.list
 apt-get update
-apt-get install -y -q "docker-engine-$1"
+apt-get install -y -d "docker-engine=$1*"
