@@ -11,13 +11,16 @@ EOF
 
 NAME="docker-build-centos"
 
-if [[ -n $1 ]]; then
-    all_versions=$1
-else
+if [[ -z $1 || $1 == "all" ]]; then
     all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
+else
+    all_versions=$1
 fi
 
 for v in $all_versions; do
+    echo "Pulling version $v..."
     yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME-$v
-    tar zcf /data/$NAME-$v.tar /data/$NAME-$v
+    tar zcf /data/$NAME-$v.tar -C /data $NAME-$v
 done
+
+find /data -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;

@@ -1,13 +1,20 @@
 #!/bin/bash
 
-if [[ -n $2 ]]; then
-    echo "generate centos by $1 at $2"
+if [[ -n $1 ]]; then
+    dist_version=$1
 else
-    echo "generate centos by $1 at all."
+    dist_version=7
 fi
 
-NAME="docker-build-centos-$1"
+if [[ -n $2 ]]; then
+    docker_version=$2
+else
+    docker_version=all
+fi
 
+echo "generate centos by $dist_version at $docker_version."
+
+NAME="docker-build-centos-$docker_version"
 if docker inspect "$NAME" 2>&1 > /dev/null; then
     docker rm -f "$NAME"
 fi
@@ -17,4 +24,4 @@ docker run -it \
   --volume=`pwd`/data:/data \
   --volume=`pwd`/build-inner:/usr/bin/build-inner \
   --entrypoint="/usr/bin/build-inner" \
-  "centos:$1" $2
+  "centos:$1" $docker_version
