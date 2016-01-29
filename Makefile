@@ -4,7 +4,7 @@ print-%: ; @echo $*=$($*)
 
 all: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz target/docker-$(DOCKER_VERSION)-all.tar.gz
 
-github-release: ubuntu1404-github total-github
+github-release: ubuntu1404-github ubuntu1204-github total-github
 
 target/ubuntu14.04:
 	echo 'building ubuntu 14.04'
