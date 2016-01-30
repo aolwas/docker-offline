@@ -10,7 +10,7 @@ case "$(uname -m)" in
 		;;
 	*)
 		echo >&2 'Error: you are not using a 64bit platform.'
-		echo >&2 'Daomonit currently only supports 64bit platforms.'
+		echo >&2 'Docker currently only supports 64bit platforms.'
 		exit 1
 		;;
 esac
@@ -77,6 +77,16 @@ case "$lsb_dist" in
 				lsb_version="$(lsb_release --release | cut -f2)"
 			fi
 			$sh_c "dpkg -i ubuntu${lsb_version}/*.deb"
+
+		)
+		exit 0
+		;;
+
+	centos)
+		(
+			echo " * Installing Docker..."
+			dist_version="$(rpm -q --whatprovides redhat-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//')"
+			$sh_c "yum --nogpgcheck localinstall -y centos${dist_version}/*.rpm"
 
 		)
 		exit 0
