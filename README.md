@@ -23,8 +23,11 @@ Docker 离线化安装包,可以离线安装Docker
 	
 可以发布到 github
 
+	make github-tag (试图创建tag)
 	make github-release
 
+需要安装github-release
+需要环境变量 GITHUB_TOKEN
 
 ## 使用方法
 
