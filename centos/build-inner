@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cat >/etc/yum.repos.d/docker-main.repo <<-EOF
+[docker-main-repo]
+name=Docker main Repository
+baseurl=https://get.daocloud.io/docker/yum-repo/main/centos/$2
+enabled=1
+gpgcheck=1
+gpgkey=https://get.daocloud.io/docker/yum/gpg
+EOF
+
+NAME="docker-build-centos"
+if [[ -z $1 || $1 == "all" ]]; then
+    all_versions=`yum --showduplicates list docker-engine.x86_64 | grep docker-engine.x86_64 | awk '{print $2}' | awk '{split($0, v, "-");print v[1]}'`
+else
+    all_versions=$1
+fi
+
+NAME=$NAME-$2
+for v in $all_versions; do
+    echo "Pulling version $v..."
+    yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME-$v
+    yum reinstall libsemanage --downloadonly --downloaddir=/data/$NAME-$v
+    #tar zcf /data/$NAME-$v.tar -C /data $NAME-$v
+done
+
+#find /data -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;
