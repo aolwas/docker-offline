@@ -1,37 +1,46 @@
 # docker-offline
 
-Docker 离线化安装包,可以离线安装Docker
+Docker offline installation package
 
-支持操作系统
+Supported operating systems:
 
 * Ubuntu 14.04 (Working)
 * Centos 7 (Working)
 
 
-## 发布方法
+## Build package
 
-编辑`version`文件。控制docker版本
+An installed Docker engine is needed to build packages
 
-	make
+Edit `version` file to specify docker version, then run:
 
-可以得到
+```
+make
+```
+
+to generates the following archives:
 
 * docker-offline-all-<docker-version>.tar.gz
 * docker-offline-ubuntu-14.04-<docker-version>.tar.gz
 * docker-offline-centos-7-<docker-version>.tar.gz
 
-	
-可以发布到 github
+## Publish to Github	
 
-	make github-tag (试图创建tag)
-	make github-release
+Use the following command to publish to github:
 
-需要安装github-release
-需要环境变量 GITHUB_TOKEN
+```
+make github-tag (create tag)
+make github-release
+```
 
-## 使用方法
+In order to use this functionality, github-release should be availble on the system.
 
-	tar -zxvf docker-offline-all-<docker-version>.tar.gz
-	./docker-offline/install.sh
-	
+Be sur to set the GITHUB_TOKEN environment variable
+
+## Install a package
+
+```
+tar -zxvf docker-offline-all-<docker-version>.tar.gz
+./docker-offline/install.sh
+```	
 
