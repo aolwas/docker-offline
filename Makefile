@@ -31,10 +31,10 @@ target/docker-$(DOCKER_VERSION)-centos7.tar.gz: target/centos7
 	tar -zcvf target/docker-$(DOCKER_VERSION)-centos7.tar.gz -C target docker-$(DOCKER_VERSION)-centos7
 
 ubuntu1404-github: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz github-tag
-	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz 2>/dev/null; true
+	github-release upload -u xamoc -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz 2>/dev/null; true
 
 centos7-github: target/docker-$(DOCKER_VERSION)-centos7.tar.gz github-tag
-	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-centos7.tar.gz -f target/docker-$(DOCKER_VERSION)-centos7.tar.gz 2>/dev/null; true
+	github-release upload -u xamoc -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-centos7.tar.gz -f target/docker-$(DOCKER_VERSION)-centos7.tar.gz 2>/dev/null; true
 
 target/ubuntu12.04:
 	echo 'building ubuntu 12.04'
@@ -49,7 +49,7 @@ target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz: target/ubuntu12.04
 	tar -zcvf target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz -C target docker-$(DOCKER_VERSION)-ubuntu12.04
 
 ubuntu1204-github: target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz github-tag
-	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz 2>/dev/null; true
+	github-release upload -u xamoc -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz -f target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz 2>/dev/null; true
 
 target/docker-$(DOCKER_VERSION)-all.tar.gz: target/ubuntu14.04 target/centos7
 	rm -rf target/docker-$(DOCKER_VERSION)-all
@@ -60,10 +60,10 @@ target/docker-$(DOCKER_VERSION)-all.tar.gz: target/ubuntu14.04 target/centos7
 	tar -zcvf target/docker-$(DOCKER_VERSION)-all.tar.gz -C target docker-$(DOCKER_VERSION)-all
 
 total-github: target/docker-$(DOCKER_VERSION)-all.tar.gz github-tag
-	github-release upload -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-all.tar.gz -f target/docker-$(DOCKER_VERSION)-all.tar.gz 2>/dev/null; true
+	github-release upload -u xamoc -r docker-offline -t $(DOCKER_VERSION) -n docker-$(DOCKER_VERSION)-all.tar.gz -f target/docker-$(DOCKER_VERSION)-all.tar.gz 2>/dev/null; true
 
 github-tag:
-	github-release release -u DaoCloud -r docker-offline -t $(DOCKER_VERSION) 2>/dev/null; true
+	github-release release -u xamoc -r docker-offline -t $(DOCKER_VERSION) 2>/dev/null; true
 
 
 clean:
