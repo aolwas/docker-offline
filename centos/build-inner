@@ -17,10 +17,11 @@ else
 fi
 
 NAME=$NAME-$2
+yum erase -y fakesystemd*
 for v in $all_versions; do
     echo "Pulling version $v..."
     yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME-$v
-    yum reinstall libsemanage --downloadonly --downloaddir=/data/$NAME-$v
+    #yum reinstall libsemanage --downloadonly --downloaddir=/data/$NAME-$v
     #tar zcf /data/$NAME-$v.tar -C /data $NAME-$v
 done
 
