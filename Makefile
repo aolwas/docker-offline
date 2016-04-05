@@ -2,7 +2,7 @@ include Makefile.variable
 
 print-%: ; @echo $*=$($*)
 
-all: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz target/docker-$(DOCKER_VERSION)-centos7.tar.gz target/docker-$(DOCKER_VERSION)-all.tar.gz
+all: target/docker-$(DOCKER_VERSION)-ubuntu14.04.tar.gz target/docker-$(DOCKER_VERSION)-ubuntu12.04.tar.gz target/docker-$(DOCKER_VERSION)-centos7.tar.gz target/docker-$(DOCKER_VERSION)-centos7.1.tar.gz target/docker-$(DOCKER_VERSION)-all.tar.gz
 
 github-release: ubuntu1404-github ubuntu1204-github centos7-github centos7.1-github total-github
 
