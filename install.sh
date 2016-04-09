@@ -92,6 +92,16 @@ case "$lsb_dist" in
 		exit 0
 		;;
 
+	rhel)
+		(
+			echo " * Installing Docker..."
+			dist_version="$(rpm -q --whatprovides redhat-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//')"
+			$sh_c "yum --nogpgcheck localinstall -y centos${dist_version}/*.rpm"
+
+		)
+		exit 0
+		;;
+
 esac
 
 $sh_c 'curl -sSL https://get.daocloud.io/docker/ | sh'
