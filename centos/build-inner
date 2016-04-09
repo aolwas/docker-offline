@@ -17,8 +17,7 @@ else
 fi
 
 NAME=$NAME-$2
-yum erase -y fakesystemd* 
-yum erase -y yum erase -y libsemanage*
+yum erase -y fakesystemd* libsemanage*
 
 for v in $all_versions; do
     echo "Pulling version $v..."
