@@ -82,7 +82,7 @@ case "$lsb_dist" in
 		exit 0
 		;;
 
-	centos)
+	centos|rhel)
 		(
 			echo " * Installing Docker..."
 			dist_version="$(rpm -q --whatprovides redhat-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//')"
@@ -91,7 +91,6 @@ case "$lsb_dist" in
 		)
 		exit 0
 		;;
-
 esac
 
 $sh_c 'curl -sSL https://get.daocloud.io/docker/ | sh'

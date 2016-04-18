@@ -3,7 +3,7 @@
 cat >/etc/yum.repos.d/docker-main.repo <<-EOF
 [docker-main-repo]
 name=Docker main Repository
-baseurl=https://get.daocloud.io/docker/yum-repo/main/centos/$2
+baseurl=https://get.daocloud.io/docker/yum-repo/main/centos/7
 enabled=1
 gpgcheck=1
 gpgkey=https://get.daocloud.io/docker/yum/gpg
@@ -17,10 +17,12 @@ else
 fi
 
 NAME=$NAME-$2
+yum erase -y fakesystemd* libsemanage*
+
 for v in $all_versions; do
     echo "Pulling version $v..."
     yum install docker-engine-$v --downloadonly --downloaddir=/data/$NAME-$v
-    yum reinstall libsemanage --downloadonly --downloaddir=/data/$NAME-$v
+    #yum reinstall libsemanage --downloadonly --downloaddir=/data/$NAME-$v
     #tar zcf /data/$NAME-$v.tar -C /data $NAME-$v
 done
 

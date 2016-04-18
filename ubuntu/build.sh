@@ -18,7 +18,8 @@ docker cp ubuntu/build-inner "$NAME":/usr/bin/build-inner
 
 docker start -a $NAME
 
-rm -rf /tmp/$NAME
+mkdir -p /tmp/$NAME
 docker cp "$NAME":/var/cache/apt/archives/ /tmp/$NAME
 cp /tmp/$NAME/*.deb $3
+rm -rf /tmp/$NAME
  
